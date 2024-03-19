@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio Transcription</title>
+</head>
+<body>
+    <h1>Transcribe Audio</h1>
+    <form id="transcriptionForm" action="/" method="post">
+        <label for="audio_url">Audio URL:</label><br>
+        <input type="text" id="audio_url" name="audio_url" style="width: 40vw;" required><br><br>
+        
+        <label for="number_of_speakers">Number of Speakers:</label><br>
+        <input type="number" id="number_of_speakers" name="number_of_speakers" min="1" max="10" required value="2"><br><br>
+        <input type="submit" value="Transcribe">
+    </form>
+    <div id="loadingMessage" style="display: none;">
+        <p>Loading...</p>
+        <p id="elapsedTime"></p>
+    </div>
+    <script>
+        document.getElementById("transcriptionForm").addEventListener("submit", function() {
+            document.getElementById("loadingMessage").style.display = "block";
+            var startTime = Date.now();
+            setInterval(function() {
+                var elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+                document.getElementById("elapsedTime").innerText = "Elapsed Time: " + elapsedTime + " seconds";
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
